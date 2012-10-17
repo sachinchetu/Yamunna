@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="./resources/css/layout.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="./resources/css/nav.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="./resources/css/jquery.weekcalendar.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="./resources/js/calender/css/smoothness/jquery-ui-1.8rc3.custom.css" media="screen" />
+     <link rel="stylesheet" type="text/css" href="./resources/js/calender/css/smoothness/jquery-ui-1.8rc3.custom.css" media="screen" /> 
     <link rel="stylesheet" type="text/css" href="./resources/css/demo.css" media="screen" />
     <!--[if IE 6]><link rel="stylesheet" type="text/css" href="css/ie6.css" media="screen" /><![endif]-->
     <!--[if IE 7]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" /><![endif]-->
