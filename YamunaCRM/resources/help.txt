@@ -1,5 +1,0 @@
-// In this folder you need to keep
-1) property files
-2) configuration xml like struts.xml
-3) log4j.xml
-etc.

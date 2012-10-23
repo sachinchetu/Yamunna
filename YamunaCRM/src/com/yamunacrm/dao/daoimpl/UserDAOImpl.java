@@ -25,6 +25,7 @@ public class UserDAOImpl extends GenericDAOImpl<Users, Integer> implements UserD
 			
 			
 		}catch (Exception e) {
+                    System.out.println("PRINT :: "+e.getMessage());
 			e.printStackTrace();
 			
 		}
