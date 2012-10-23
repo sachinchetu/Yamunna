@@ -15,7 +15,6 @@
     <script type="text/javascript">
  
 $.subscribe('removeErrors', function(event,data) {
-         alert("test");
          $('.error').html('').removeClass('error');
 
         });
@@ -50,9 +49,8 @@ $.subscribe('removeErrors', function(event,data) {
                 });
             }else{
 
-                $.subscribe('dialogopentopic', function(event,ui) {
-	        alert('run topic on dialog open');
-		});
+$( "#myclickdialog" ).dialog( "option", "autoOpen", false );
+       
             }
  }
 });
@@ -101,7 +99,7 @@ $.subscribe('removeErrors', function(event,data) {
     <body>
 
         
-        <s:form name="loginForm" id="loginForm" cssClass="box login" action="loginAction" theme="simple"   validate="true" >
+        <s:form name="loginForm" id="loginForm" cssClass="box login" action="logAction" theme="simple"   validate="true" >
             <fieldset class="boxBody">
                 <label>Username <span id="userNameError"></span></label>
                 <s:url  action="forgetPassword" id="forgetPasswordUrl"  >
@@ -110,7 +108,7 @@ $.subscribe('removeErrors', function(event,data) {
                 <s:textfield name="userName" theme="simple" id="userName" tabindex="1" required="true"/>
                
                
-                <label><sj:a  targets="myclickdialog" onclick="forgetPass()"   cssClass="rLink" dataType="json"   validate="true" validateFunction="customeValidation" >Forget your password?</sj:a>Password <span id="passwordError"></span></label>
+                <label><sj:a  targets="myclickdialog" onclick="forgetPass()"   cssClass="rLink" dataType="json">Forget your password?</sj:a>Password <span id="passwordError"></span></label>
                 <span class="error" ><s:fielderror fieldName="password" name="password"  /></span>
                 <s:password name="password" id="password" tabindex="2" required="true"/>
             </fieldset>
@@ -125,7 +123,7 @@ $.subscribe('removeErrors', function(event,data) {
             id="myclickdialog"
             autoOpen="false"
             modal="true"
-            onOpenTopics="dialogopentopic"
+            openTopics="dialogopentopic"
             resizable="false"
             title="Forget Password"
             buttons="{

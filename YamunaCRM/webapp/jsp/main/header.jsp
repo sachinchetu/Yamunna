@@ -36,7 +36,7 @@
     <script language="javascript" type="text/javascript" src="./resources/js/jqPlot/plugins/jqplot.pointLabels.min.js"></script>
     <script language="javascript" type="text/javascript" src="./resources/js/calender/jquery-ui-1.8rc3.custom.min.js"></script>
     <script language="javascript" type="text/javascript" src="./resources/js/calender/jquery.weekcalendar.js"></script>
-    <script language="javascript" type="text/javascript" src="./resources/js/calender/demo.js"></script>
+  
     <!-- END: load jqplot -->
     <script src="./resources/js/setup.js" type="text/javascript"></script>
   
