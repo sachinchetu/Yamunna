@@ -37,7 +37,7 @@ public class LoginAction extends ActionSupport {
   private String            password;
 
   @Action(value = "/logAction", results = {
-    @Result(location = "/jsp/main/dashboard.jsp", name = "success")
+    @Result(location = "/jsp/main/main.jsp", name = "success")
   })
   public String execute() throws Exception
   {
