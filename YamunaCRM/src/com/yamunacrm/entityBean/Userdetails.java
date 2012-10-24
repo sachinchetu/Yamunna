@@ -86,9 +86,6 @@ public class Userdetails implements Serializable {
     private Date endDate;
     @Column(name = "lastName", length = 45)
     private String lastName;
-    @JoinColumn(name = "roleId", referencedColumnName = "roleId", nullable = false)
-    @ManyToOne(optional = false)
-    private Roles roleId;
     @JoinColumn(name = "reportTo", referencedColumnName = "userId", nullable = false)
     @ManyToOne(optional = false)
     private Users reportTo;
@@ -234,14 +231,7 @@ public class Userdetails implements Serializable {
         this.lastName = lastName;
     }
 
-    public Roles getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Roles roleId) {
-        this.roleId = roleId;
-    }
-
+   
     public Users getReportTo() {
         return reportTo;
     }

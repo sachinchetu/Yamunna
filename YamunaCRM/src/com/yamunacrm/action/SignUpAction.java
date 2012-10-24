@@ -32,7 +32,14 @@ import org.apache.struts2.convention.annotation.Result;
     @RequiredStringValidator(fieldName = "lastName", type = ValidatorType.FIELD, message = "Last Name is required."),
     @RequiredStringValidator(fieldName = "mobileNumber", type = ValidatorType.FIELD, message = "Mobile # is required."),
     @RequiredStringValidator(fieldName = "address", type = ValidatorType.FIELD, message = "Address is required."),
-    @RequiredStringValidator(fieldName = "email", type = ValidatorType.FIELD, message = "Email is Required.")
+    @RequiredStringValidator(fieldName = "email", type = ValidatorType.FIELD, message = "Email is Required."),
+    @RequiredStringValidator(fieldName = "panCard", type = ValidatorType.FIELD, message = "Pan # is Required."),
+    @RequiredStringValidator(fieldName = "reportedTo", type = ValidatorType.FIELD, message = "Report To is Required."),
+    @RequiredStringValidator(fieldName = "supervisorName", type = ValidatorType.FIELD, message = "Supervisor is Required."),
+    @RequiredStringValidator(fieldName = "officialEmail", type = ValidatorType.FIELD, message = "Official Email is Required."),
+    @RequiredStringValidator(fieldName = "fatherName", type = ValidatorType.FIELD, message = "Father Name is Required."),
+    @RequiredStringValidator(fieldName = "empCode", type = ValidatorType.FIELD, message = "Employee is Required.")
+   
 },
 emails = {
     @EmailValidator(fieldName = "userName", type = ValidatorType.FIELD, message = "User name is invalid."),
@@ -49,8 +56,11 @@ public class SignUpAction extends ActionSupport {
     private String firstName;
     private String lastName;
     private String userName;
-    private String password;
-    private String confirmPassword;
+    private String fatherName;
+    private String empCode;
+    private String reportedTo;
+    private String supervisorName;
+    private String panCard;
     private String mobileNumber;
     private String officialMobileNumber;
     private String code;
@@ -75,14 +85,7 @@ public class SignUpAction extends ActionSupport {
         this.code = code;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-
+   
     public String getEmail() {
         return email;
     }
@@ -109,6 +112,46 @@ public class SignUpAction extends ActionSupport {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getEmpCode() {
+        return empCode;
+    }
+
+    public void setEmpCode(String empCode) {
+        this.empCode = empCode;
+    }
+
+    public String getFatherName() {
+        return fatherName;
+    }
+
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
+    }
+
+    public String getPanCard() {
+        return panCard;
+    }
+
+    public void setPanCard(String panCard) {
+        this.panCard = panCard;
+    }
+
+    public String getReportedTo() {
+        return reportedTo;
+    }
+
+    public void setReportedTo(String reportedTo) {
+        this.reportedTo = reportedTo;
+    }
+
+    public String getSupervisorName() {
+        return supervisorName;
+    }
+
+    public void setSupervisorName(String supervisorName) {
+        this.supervisorName = supervisorName;
     }
 
     public void setLastName(String lastName) {
@@ -139,14 +182,7 @@ public class SignUpAction extends ActionSupport {
         this.officialMobileNumber = officialMobileNumber;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+ 
     public String getUserName() {
         return userName;
     }
@@ -164,7 +200,6 @@ public class SignUpAction extends ActionSupport {
 
         SignUpDTO signUpDto = new SignUpDTO();
         signUpDto.setUserName(userName);
-        signUpDto.setPassword(password);
         signUpDto.setFirstName(firstName);
         signUpDto.setLastName(lastName);
         try {
