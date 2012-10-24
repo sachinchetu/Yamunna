@@ -11,6 +11,7 @@ import com.opensymphony.xwork2.validator.annotations.RegexFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 import com.opensymphony.xwork2.validator.annotations.ValidatorType;
+import com.yamunacrm.dto.SignUpDTO;
 import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
@@ -36,14 +37,15 @@ import org.apache.struts2.convention.annotation.Result;
 emails = {
     @EmailValidator(fieldName = "userName", type = ValidatorType.FIELD, message = "User name is invalid."),
     @EmailValidator(fieldName = "email", type = ValidatorType.FIELD, message = "Invalid email.")
-        },
-regexFields= {
-    @RegexFieldValidator(fieldName="mobileNumber",type=ValidatorType.FIELD,message="Mobile number is invalid.",expression="^[0-9]{10}$"),
-    @RegexFieldValidator(fieldName="officialMobileNumber",type=ValidatorType.FIELD,message="Official Mobile number is invalid.",expression="^[0-9]{10}$")},
-    expressions= { @ExpressionValidator(expression="password==confirmPassword",message="Password and Confirm password must be same")})
+},
+regexFields = {
+    @RegexFieldValidator(fieldName = "mobileNumber", type = ValidatorType.FIELD, message = "Mobile number is invalid.", expression = "^[0-9]{10}$"),
+    @RegexFieldValidator(fieldName = "officialMobileNumber", type = ValidatorType.FIELD, message = "Official Mobile number is invalid.", expression = "^[0-9]{10}$")},
+expressions = {
+    @ExpressionValidator(expression = "password==confirmPassword", message = "Password and Confirm password must be same")})
 public class SignUpAction extends ActionSupport {
 
-    private static final Logger log=Logger.getLogger(SignUpAction.class);
+    private static final Logger log = Logger.getLogger(SignUpAction.class);
     private String firstName;
     private String lastName;
     private String userName;
@@ -158,8 +160,30 @@ public class SignUpAction extends ActionSupport {
         @Result(name = "error", location = "/signup.jsp"),
         @Result(name = "input", location = "/signup.jsp")})
     public String execute() {
-        log.info(firstName+" "+lastName+" "+mobileNumber);
 
+
+        SignUpDTO signUpDto = new SignUpDTO();
+        signUpDto.setUserName(userName);
+        signUpDto.setPassword(password);
+        signUpDto.setFirstName(firstName);
+        signUpDto.setLastName(lastName);
+        try {
+            signUpDto.setMobileNo(Integer.parseInt(mobileNumber));
+        } catch (NumberFormatException e) {
+            addFieldError(mobileNumber, "Invalid Mobile Number");
+            return ERROR;
+        }
+        try {
+            signUpDto.setOfficialMobileNo(Integer.parseInt(officialMobileNumber));
+        } catch (NumberFormatException ex) {
+            addFieldError(officialMobileNumber, "Official Mobile number is invalid.");
+            return ERROR;
+        }
+
+        //signUpDto.setLandlineNo(Integer.MIN_VALUE);
+        signUpDto.setAddress(address);
+        signUpDto.setEmail(email);
+        signUpDto.setOfficialEmail(officialEmail);
         return SUCCESS;
     }
 }

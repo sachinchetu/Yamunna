@@ -9,6 +9,8 @@ import com.opensymphony.xwork2.validator.annotations.EmailValidator;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 import com.opensymphony.xwork2.validator.annotations.ValidatorType;
+import com.yamunacrm.dao.UserDAO;
+import com.yamunacrm.dao.daoimpl.UserDAOImpl;
 import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
@@ -22,7 +24,7 @@ import org.apache.struts2.convention.annotation.Result;
 @ParentPackage("struts-alternate")
 @InterceptorRef("jsonValidationWorkflowStack")
 @Validations(requiredStrings = {
-    @RequiredStringValidator(fieldName = "userName", type = ValidatorType.FIELD, message = " is required"),
+    @RequiredStringValidator(fieldName = "userName", type = ValidatorType.FIELD, message = " is required")
    },
  emails={
     @EmailValidator(fieldName = "userName", type=ValidatorType.FIELD, message = " is invalid")})
@@ -36,15 +38,20 @@ public class ForgetPasswordAction extends ActionSupport {
   private String            echo;
 
   @Action(value = "/forgetPassword", results = {
-    @Result(location = "/index.jsp", name = "success")
+    @Result(location = "/index.jsp", name = "success"),@Result(location="/index.jsp",name="error")
   })
   public String execute() throws Exception
   {
       log.info("User "+userName);
-    echo = "Welcome " + userName;
-
-
-    return SUCCESS;
+    UserDAO userDao=new UserDAOImpl();
+    if(!userDao.checkAvailbility(userName))
+    {
+       addFieldError(userName, "Invalid User.");
+       return ERROR;
+    }else{
+        //to do 
+        return SUCCESS;
+    }
   }
 
 

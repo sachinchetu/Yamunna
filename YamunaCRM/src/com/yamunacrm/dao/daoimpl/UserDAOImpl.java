@@ -9,6 +9,7 @@ import com.yamunacrm.util.HibernateUtil;
 
 public class UserDAOImpl extends GenericDAOImpl<Users, Integer> implements UserDAO{
 
+    @Override
 	public boolean authentication(String userName, String password) {
 		boolean successFlag=false;
 		Session session=null;
@@ -33,5 +34,28 @@ public class UserDAOImpl extends GenericDAOImpl<Users, Integer> implements UserD
 		return successFlag;
 	}
 
-	
+    @Override
+	public boolean checkAvailbility(String userID) {
+        boolean successFlag=false;
+        Session session=null;
+        Transaction transaction=null;
+        try
+        {
+            session=HibernateUtil.getCurretSession();
+            transaction=session.beginTransaction();
+            Users users=(Users) session.getNamedQuery("Users.findByUserName").setString("userName", userID).uniqueResult();
+            if(users!=null && users.getUserName()!=null)
+            {
+                successFlag=true;
+            }
+
+
+        }catch (Exception e) {
+                    System.out.println("PRINT :: "+e.getMessage());
+            e.printStackTrace();
+
+        }
+
+        return successFlag;
+    }
 }

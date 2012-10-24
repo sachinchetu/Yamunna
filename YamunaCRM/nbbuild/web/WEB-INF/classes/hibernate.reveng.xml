@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="yamunnadb"/>
+  <table-filter match-name="source"/>
+  <table-filter match-name="nextstep"/>
+  <table-filter match-name="billingdetails"/>
+  <table-filter match-name="state"/>
+  <table-filter match-name="oppurtunityrating"/>
+  <table-filter match-name="usertargetmapping"/>
+  <table-filter match-name="industry"/>
+  <table-filter match-name="contacts"/>
+  <table-filter match-name="location"/>
+  <table-filter match-name="opportunitytype"/>
+  <table-filter match-name="userdetails"/>
+  <table-filter match-name="status"/>
+  <table-filter match-name="task"/>
+  <table-filter match-name="oppurtunityprice"/>
+  <table-filter match-name="roles"/>
+  <table-filter match-name="productitems"/>
+  <table-filter match-name="oppurtunitystatus"/>
+  <table-filter match-name="expenses"/>
+  <table-filter match-name="companyaccount"/>
+  <table-filter match-name="oppurtunity"/>
+  <table-filter match-name="appointment"/>
+  <table-filter match-name="product"/>
+  <table-filter match-name="accountindustrymapping"/>
+  <table-filter match-name="territory"/>
+  <table-filter match-name="users"/>
+  <table-filter match-name="productcode"/>
+  <table-filter match-name="target"/>
+  <table-filter match-name="salesstages"/>
+</hibernate-reverse-engineering>

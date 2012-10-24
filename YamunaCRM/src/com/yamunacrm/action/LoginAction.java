@@ -24,7 +24,7 @@ import org.apache.struts2.convention.annotation.Result;
 @InterceptorRef("jsonValidationWorkflowStack")
 @Validations(requiredStrings = {
     @RequiredStringValidator(fieldName = "userName", type = ValidatorType.FIELD, message = " is required"),
-    @RequiredStringValidator(fieldName = "password", type = ValidatorType.FIELD, message = " is required"),},
+    @RequiredStringValidator(fieldName = "password", type = ValidatorType.FIELD, message = " is required")},
 emails = {
     @EmailValidator(fieldName = "userName", type = ValidatorType.FIELD, message = " is invalid")})
 public class LoginAction extends ActionSupport {
@@ -35,7 +35,7 @@ public class LoginAction extends ActionSupport {
     private String password;
 
     @Action(value = "/logAction", results = {
-        @Result(location = "/jsp/main/main.jsp", name = "success")
+        @Result(location = "/jsp/main/main.jsp", name = "success"),@Result(location="/index.jsp",name="error")
     })
     public String execute() throws Exception {
         log.info("User " + userName);
@@ -45,6 +45,7 @@ public class LoginAction extends ActionSupport {
         if (flag) {
             return SUCCESS;
         } else {
+            addActionError("Invalid User Name or Password.");
             return ERROR;
         }
     }
