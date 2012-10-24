@@ -93,24 +93,15 @@ if (errors.fieldErrors) {
                                 <tr>
                                     <td class="col1">
                                         <label>
-                                            Password 
+                                            Employee Code
                                         </label>
                                     </td>
                                     <td class="col2">
-                                        <s:password name="password" required="true" theme="simple" id="password" />
-                                         <span id="passwordError"></span>
+                                        <s:textfield name="empCode" required="true" theme="simple" id="empCode" />
+                                         <span id="empCodeError"></span>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="col1">
-                                        <label>
-                                            Confirm Password</label>
-                                    </td>
-                                    <td class="col2">
-                                        <s:password theme="simple"  required="true" id="confirmPassword" name="confirmPassword"/>
-                                        <span id="confirmPasswordError"></span>
-                                    </td>
-                                </tr>
+                            
                                 <tr>
                                     <td class="col1">
                                         <label>
@@ -134,7 +125,18 @@ if (errors.fieldErrors) {
                                     </td>
 
                                 </tr>
+                                    <tr>
+                                    <td class="col1">
+                                        <label>
+                                            Father's Name</label>
+                                    </td>
+                                    <td class="col2">
+                                        <s:textfield name="fatherName" id="fatherName" required="true"  />
+                                        <span id="fatherNameError"></span>
 
+                                    </td>
+
+                                </tr>
                                 <tr>
                                     <td class="col1">
                                         <label>
@@ -195,6 +197,36 @@ if (errors.fieldErrors) {
                                     <td>
                                         <s:textfield name="officialEmail" id="officialEmail" required="true" theme="simple"  />
                                         <span id="officialEmailError"></span>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>
+                                        <label>
+                                            Reported to</label>
+                                    </td>
+                                    <td>
+                                        <s:select list="#{'':'Select','1':'Sachin', '2':'Jaideep', '3':'Uday'}" name="reportedTo" id="reportedTo" headerKey="0" required="true" theme="simple"  />
+                                        <span id="reportedToError"></span>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>
+                                        <label>
+                                            Supervisor Name</label>
+                                    </td>
+                                    <td>
+                                        <s:select list="#{'':'Select','1':'Sachin', '2':'Jaideep', '3':'Uday'}" name="supervisorName" id="supervisorName" required="true" theme="simple"  />
+                                        <span id="supervisorNameError"></span>
+                                    </td>
+                                </tr>
+                                    <tr>
+                                    <td class="col1">
+                                        <label>
+                                            Pan Card #</label>
+                                    </td>
+                                    <td class="col2">
+                                            <s:textfield  theme="simple"  required="true" id="panCard" name="panCard"/>
+                                        <span id="panCardError"></span>
                                     </td>
                                 </tr>
                                 <tr>

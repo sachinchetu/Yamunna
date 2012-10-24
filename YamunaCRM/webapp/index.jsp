@@ -11,55 +11,19 @@
     </head>
 
     <sj:head jquerytheme="cupertino" jqueryui="true" loadAtOnce="true" />
-
+<script language="JavaScript" src="${pageContext.request.contextPath}/struts/utils.js" type="text/javascript"></script>
+        <script language="JavaScript" src="${pageContext.request.contextPath}/struts/xhtml/validation.js" type="text/javascript"></script>
+ 
     <script type="text/javascript">
  
 $.subscribe('removeErrors', function(event,data) {
          $('.error').html('').removeClass('error');
 
         });
-        function forgetPass()
-        {
-            var t=$('#userName').val();
-            var url="forgetPassword?userName="+t+"&struts.enableJSONValidation=true&struts.validateOnly=true";
-            $.ajax({
-            type: "post",
-            url: url,
-            async: false,
-            beforeSend: function(x) {
-            if(x && x.overrideMimeType) {
-             x.overrideMimeType("application/j-son;charset=UTF-8");
-            }
-            },
- dataType: "json",
- success: function(data){
-       if (data.fieldErrors) {
-                $.each(data.fieldErrors, function(index, value) {
-                    var elem = $('#'+index+'Error');
-                    if(elem)
-                    {
-                        elem.html(value[0]);
-                        elem.addClass('errorLabel');
-                    }
-                    var el=$('#'+index);
-                    if(el)
-                    {
-                        el.addClass('error');
-                    }
-                });
-            }else{
-                  var options_forgetPassLink = {};
-                   options_forgetPassLink.opendialog = "myclickdialog";
-                   options_forgetPassLink.jqueryaction = "anchor";
-                   options_forgetPassLink.id = "forgetPassLink";
-                   options_forgetPassLink.targets = "myclickdialog";
-                   options_forgetPassLink.href = "#";
-                   options_forgetPassLink.datatype = "json";
-                   jQuery.struts2_jquery.bind(jQuery('#forgetPassLink'),options_forgetPassLink);
-            }
- }
-});
-        }
+  $.subscribe('forgetPasswordAfter',function(event,data){
+      $('#myclickdialog').dialog('open');
+  })  ;
+
         function removeCss()
         {
             $('.errorLabel').html('').removeClass('errorLabel');
@@ -110,8 +74,10 @@ $.subscribe('removeErrors', function(event,data) {
                 <label>Username <span id="userNameError"></span></label>
                 <s:textfield name="userName" theme="simple" id="userName" tabindex="1" required="true"/>
                
-               
-                <label><sj:a id="forgetPassLink" targets="myclickdialog" onclick="forgetPass()"   cssClass="rLink" dataType="json">Forget your password?</sj:a>Password <span id="passwordError"></span></label>
+                <s:url action="forgetPassword" id="fp">
+                    <s:param name="userName" value="%{userName}"/>
+                </s:url>
+                <label><sj:a id="forgetPassLink" targets="myclickdialog"  href="%{fp}" validate="true" onCompleteTopics="forgetPasswordAfter" formIds="loginForm" cssClass="rLink" >Forget your password?</sj:a>Password <span id="passwordError"></span></label>
                 <span class="error" ><s:fielderror fieldName="password" name="password"  /></span>
                 <s:password name="password" id="password" tabindex="2" required="true"/>
             </fieldset>
@@ -134,7 +100,7 @@ $.subscribe('removeErrors', function(event,data) {
      		}"
 
             >
-            Please contact your administrator to get the password.
+            
         </sj:dialog>
 
 </body>
