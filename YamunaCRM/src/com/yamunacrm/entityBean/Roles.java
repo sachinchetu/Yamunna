@@ -54,7 +54,7 @@ public class Roles implements Serializable {
     private Character isActive;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleId")
     private Set<Users> usersSet;
-   
+
     public Roles() {
     }
 
@@ -110,7 +110,6 @@ public class Roles implements Serializable {
         this.usersSet = usersSet;
     }
 
-   
     @Override
     public int hashCode() {
         int hash = 0;

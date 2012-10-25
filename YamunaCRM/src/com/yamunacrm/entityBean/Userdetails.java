@@ -8,6 +8,7 @@ package com.yamunacrm.entityBean;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -64,11 +65,11 @@ public class Userdetails implements Serializable {
     @Column(name = "panNo", length = 45)
     private String panNo;
     @Column(name = "mobileNo")
-    private Integer mobileNo;
+    private long mobileNo;
     @Column(name = "landlineNo")
-    private Integer landlineNo;
+    private String landlineNo;
     @Column(name = "officialMobileNo")
-    private Integer officialMobileNo;
+    private long officialMobileNo;
     @Column(name = "personalMailId", length = 45)
     private String personalMailId;
     @Basic(optional = false)
@@ -93,7 +94,7 @@ public class Userdetails implements Serializable {
     @ManyToOne(optional = false)
     private Users supervisor;
     @JoinColumn(name = "userId", referencedColumnName = "userId", nullable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade=CascadeType.ALL,optional = false)
     private Users userId;
 
     public Userdetails() {
@@ -159,29 +160,30 @@ public class Userdetails implements Serializable {
         this.panNo = panNo;
     }
 
-    public Integer getMobileNo() {
-        return mobileNo;
-    }
-
-    public void setMobileNo(Integer mobileNo) {
-        this.mobileNo = mobileNo;
-    }
-
-    public Integer getLandlineNo() {
+    public String getLandlineNo() {
         return landlineNo;
     }
 
-    public void setLandlineNo(Integer landlineNo) {
+    public void setLandlineNo(String landlineNo) {
         this.landlineNo = landlineNo;
     }
 
-    public Integer getOfficialMobileNo() {
+    public long getMobileNo() {
+        return mobileNo;
+    }
+
+    public void setMobileNo(long mobileNo) {
+        this.mobileNo = mobileNo;
+    }
+
+    public long getOfficialMobileNo() {
         return officialMobileNo;
     }
 
-    public void setOfficialMobileNo(Integer officialMobileNo) {
+    public void setOfficialMobileNo(long officialMobileNo) {
         this.officialMobileNo = officialMobileNo;
     }
+
 
     public String getPersonalMailId() {
         return personalMailId;
@@ -231,7 +233,6 @@ public class Userdetails implements Serializable {
         this.lastName = lastName;
     }
 
-   
     public Users getReportTo() {
         return reportTo;
     }

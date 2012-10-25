@@ -41,7 +41,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Users.findByAccountCounter", query = "SELECT u FROM Users u WHERE u.accountCounter = :accountCounter"),
     @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
     @NamedQuery(name = "Users.findByMaxAttempt", query = "SELECT u FROM Users u WHERE u.maxAttempt = :maxAttempt"),
-    @NamedQuery(name = "Users.findByUserID", query = "SELECT u FROM Users u WHERE u.userName = :userName and u.password = :password and u.isActive = 'A'")})
+    @NamedQuery(name = "Users.findByUserID", query = "SELECT u FROM Users u WHERE u.userName = :userName and u.password = :password and u.isActive = 'Y'")})
 public class Users implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -63,7 +63,7 @@ public class Users implements Serializable {
     @Column(name = "isActive")
     private Character isActive;
     @Column(name = "accountCounter")
-    private Integer accountCounter;
+    private long accountCounter;
     @Basic(optional = false)
     @Column(name = "password", nullable = false, length = 45)
     private String password;
@@ -160,14 +160,15 @@ public class Users implements Serializable {
         this.isActive = isActive;
     }
 
-    public Integer getAccountCounter() {
+    public long getAccountCounter() {
         return accountCounter;
     }
 
-    public void setAccountCounter(Integer accountCounter) {
+    public void setAccountCounter(long accountCounter) {
         this.accountCounter = accountCounter;
     }
 
+  
     public String getPassword() {
         return password;
     }
