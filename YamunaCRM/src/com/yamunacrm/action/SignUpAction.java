@@ -12,9 +12,13 @@ import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 import com.opensymphony.xwork2.validator.annotations.ValidatorType;
 import com.yamunacrm.dto.SignUpDTO;
+import com.yamunacrm.service.LoginService;
+import com.yamunacrm.service.SignUpService;
+import java.util.Date;
 import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
@@ -23,11 +27,13 @@ import org.apache.struts2.convention.annotation.Result;
  * @author uday
  */
 @ParentPackage("struts-alternate")
-@InterceptorRef("jsonValidationWorkflowStack")
+@InterceptorRefs({
+    @InterceptorRef("jsonValidationWorkflowStack"),
+    @InterceptorRef("closeHibernateInterceptor")
+})
+
 @Validations(requiredStrings = {
     @RequiredStringValidator(fieldName = "userName", type = ValidatorType.FIELD, message = "User Name is required."),
-    @RequiredStringValidator(fieldName = "password", type = ValidatorType.FIELD, message = "Password is required."),
-    @RequiredStringValidator(fieldName = "confirmPassword", type = ValidatorType.FIELD, message = "Confirm password is required."),
     @RequiredStringValidator(fieldName = "firstName", type = ValidatorType.FIELD, message = "First Name is required."),
     @RequiredStringValidator(fieldName = "lastName", type = ValidatorType.FIELD, message = "Last Name is required."),
     @RequiredStringValidator(fieldName = "mobileNumber", type = ValidatorType.FIELD, message = "Mobile # is required."),
@@ -42,7 +48,6 @@ import org.apache.struts2.convention.annotation.Result;
    
 },
 emails = {
-    @EmailValidator(fieldName = "userName", type = ValidatorType.FIELD, message = "User name is invalid."),
     @EmailValidator(fieldName = "email", type = ValidatorType.FIELD, message = "Invalid email.")
 },
 regexFields = {
@@ -192,33 +197,46 @@ public class SignUpAction extends ActionSupport {
     }
 
     @Action(value = "/SignupAction", results = {
-        @Result(name = "success", location = "/success.jsp"),
+        @Result(name = "success", location = "/jsp/main/main.jsp"),
         @Result(name = "error", location = "/signup.jsp"),
         @Result(name = "input", location = "/signup.jsp")})
     public String execute() {
-
-
         SignUpDTO signUpDto = new SignUpDTO();
+           LoginService loginService=new LoginService();
+         if(loginService.checkAvaility(userName))
+         {
+          addActionError("User name already exist.");
+                return ERROR;
+          }
+
         signUpDto.setUserName(userName);
         signUpDto.setFirstName(firstName);
         signUpDto.setLastName(lastName);
-        try {
-            signUpDto.setMobileNo(Integer.parseInt(mobileNumber));
-        } catch (NumberFormatException e) {
-            addFieldError(mobileNumber, "Invalid Mobile Number");
-            return ERROR;
-        }
-        try {
-            signUpDto.setOfficialMobileNo(Integer.parseInt(officialMobileNumber));
-        } catch (NumberFormatException ex) {
-            addFieldError(officialMobileNumber, "Official Mobile number is invalid.");
-            return ERROR;
-        }
+        signUpDto.setFatherName(fatherName);
+        signUpDto.setPanNo(panCard);
+        signUpDto.setEmployeeCode(empCode);
+        signUpDto.setReportTo(Integer.parseInt(reportedTo));
+        signUpDto.setSupervisor(Integer.parseInt(supervisorName));
 
-        //signUpDto.setLandlineNo(Integer.MIN_VALUE);
+            signUpDto.setMobileNo(Long.parseLong(mobileNumber));
+            signUpDto.setOfficialMobileNo(Long.parseLong(officialMobileNumber));
+       
+        signUpDto.setLandlineNo(code+"-"+landLineNumber);
         signUpDto.setAddress(address);
         signUpDto.setEmail(email);
         signUpDto.setOfficialEmail(officialEmail);
+        signUpDto.setCreatedOn(new Date());
+        signUpDto.setIsActive('Y');
+        signUpDto.setPassword("India");
+        signUpDto.setRoleId(3);
+        SignUpService signUpService=new SignUpService();
+        try{
+            signUpService.userSignUp(signUpDto);
+        }catch(Exception e)
+        {
+        addActionError("Unable to save user");
+        log.error(e.getMessage());
+        }
         return SUCCESS;
     }
 }
