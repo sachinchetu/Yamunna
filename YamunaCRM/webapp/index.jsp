@@ -70,7 +70,7 @@ $.subscribe('removeErrors', function(event,data) {
         
         <s:form name="loginForm" id="loginForm" cssClass="box login" action="logAction" theme="simple"   validate="true" >
             <fieldset class="boxBody">
-                <s:actionerror theme="simple"/>
+                <s:actionerror theme="simple" theme="jquery" />
                 <label>Username <span id="userNameError"></span></label>
                 <s:textfield name="userName" theme="simple" id="userName" tabindex="1" required="true"/>
                

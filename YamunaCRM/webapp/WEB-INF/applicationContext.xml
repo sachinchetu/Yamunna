@@ -4,4 +4,7 @@
 <bean id="logAction" class="com.yamunacrm.action.LoginAction" >
 
 </bean>
+<bean id="forgetPassword" class="com.yamunacrm.action.ForgetPasswordAction">
+    
+</bean>
 </beans>
