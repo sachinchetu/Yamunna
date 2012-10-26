@@ -7,12 +7,20 @@ package com.yamunacrm.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
 /**
  *
  * @author uday
  */
+@ParentPackage("struts-alternate")
+@InterceptorRefs({
+    @InterceptorRef("closeHibernateInterceptor")
+})
+
 public class DashboardAction extends ActionSupport {
 
     @Action(value="/homeUrl",results={@Result(location="/jsp/main/home.jsp",name="success")})
