@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import org.hibernate.Transaction;
-
 import com.yamunacrm.dao.GenericDAO;
 import com.yamunacrm.util.HibernateUtil;
 
@@ -18,7 +16,8 @@ public abstract class GenericDAOImpl<T, PK extends Serializable> implements Gene
 	}
 	@SuppressWarnings("unchecked")
 	public T findByID(PK id) {
-		return (T)HibernateUtil.getCurretSession().get(type, id);
+		
+		 return (T) HibernateUtil.getCurretSession().get(type, id);
 	}
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
@@ -26,15 +25,11 @@ public abstract class GenericDAOImpl<T, PK extends Serializable> implements Gene
 	}
 	public boolean saveOrUpdate(T entity) {
 		boolean successFlag=false;
-		Transaction transaction=null;
 		try
 		{
-			transaction=HibernateUtil.getCurretSession().beginTransaction();
-			HibernateUtil.getCurretSession().saveOrUpdate(entity);
-			transaction.commit();
+			HibernateUtil.getCurretSession().save(entity);
 			successFlag=true;
 		}catch (Exception e) {
-			transaction.rollback();
 			e.printStackTrace();
 		}
 		return successFlag;
