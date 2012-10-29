@@ -13,9 +13,9 @@ public class SignUpDTO implements Serializable {
     private String email;
     private String officialEmail;
     private String panNo;
-    private Integer mobileNo;
-    private Integer landlineNo;
-    private Integer officialMobileNo;
+    private long mobileNo;
+    private String landlineNo;
+    private long officialMobileNo;
     private String personalMailId;
     private String officialMailId;
     private Date createdOn;
@@ -74,29 +74,31 @@ public class SignUpDTO implements Serializable {
         this.panNo = panNo;
     }
 
-    public Integer getMobileNo() {
-        return mobileNo;
-    }
-
-    public void setMobileNo(Integer mobileNo) {
-        this.mobileNo = mobileNo;
-    }
-
-    public Integer getLandlineNo() {
+    public String getLandlineNo() {
         return landlineNo;
     }
 
-    public void setLandlineNo(Integer landlineNo) {
+    public void setLandlineNo(String landlineNo) {
         this.landlineNo = landlineNo;
     }
 
-    public Integer getOfficialMobileNo() {
+    public long getMobileNo() {
+        return mobileNo;
+    }
+
+    public void setMobileNo(long mobileNo) {
+        this.mobileNo = mobileNo;
+    }
+
+    public long getOfficialMobileNo() {
         return officialMobileNo;
     }
 
-    public void setOfficialMobileNo(Integer officialMobileNo) {
+    public void setOfficialMobileNo(long officialMobileNo) {
         this.officialMobileNo = officialMobileNo;
     }
+
+    
 
     public String getPersonalMailId() {
         return personalMailId;
