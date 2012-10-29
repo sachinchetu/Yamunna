@@ -26,5 +26,8 @@
 
 <struts>
     <package name="struts-alternate" extends="struts-default,json-default" namespace="/">
-    </package>
+     <interceptors>
+            <interceptor name="closeHibernateInterceptor" class="com.yamunacrm.interceptor.HibernateSessionInterceptor" />
+        </interceptors>
+	</package>
 </struts>
